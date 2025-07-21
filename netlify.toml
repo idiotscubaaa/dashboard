@@ -1,13 +1,21 @@
 [build]
-  command   = "npm install && npm run build"
-  publish   = "dist"
+  command = "npm install && npm run build"
+  publish = "dist"
+
+# Allow the CMS under /admin to load its own files (including eval)
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    # Allow eval (unsafe‑eval) and inline scripts/styles from our CDNs
+    Content-Security-Policy = "script-src 'self' 'unsafe-eval' https://identity.netlify.com https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+
+# Fallback for your SPA
+[[redirects]]
+  from = "/admin/*"
+  to   = "/admin/:splat"
+  status = 200
 
 [[redirects]]
-  from     = "/admin/*"
-  to       = "/admin/:splat"
-  status   = 200
-
-[[redirects]]
-  from     = "/*"
-  to       = "/index.html"
-  status   = 200
+  from = "/*"
+  to   = "/index.html"
+  status = 200
