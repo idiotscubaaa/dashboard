@@ -1,0 +1,5 @@
+# Allow Netlify CMS under /admin to load its own files
+/admin/*    /admin/:splat    200
+
+# All other paths go to index.html (your SPA)
+/*          /index.html      200
