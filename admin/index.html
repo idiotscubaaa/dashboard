@@ -3,8 +3,26 @@
   <head>
     <meta charset="utf-8" />
     <title>Content Manager</title>
+
+    <!-- Netlify Identity widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+      // Initialize Netlify Identity
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            // If not logged in, open the Identity modal
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+        window.netlifyIdentity.init();
+      }
+    </script>
   </head>
   <body>
+    <!-- Netlify CMS -->
     <script src="https://unpkg.com/netlify-cms-app/dist/netlify-cms.js"></script>
   </body>
 </html>
